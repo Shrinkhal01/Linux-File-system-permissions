@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Conversion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Input Converter</h1>
+        <input type="text" id="inputText" placeholder="Enter something" />
+        <button onclick="convertInput()">Convert</button>
+        <div class="output" id="outputBox">Output will appear here</div>
+    </div>
+
+    <script>
+        function convertInput() {
+            const inputText = document.getElementById('inputText').value;
+
+            if (inputText.length !== 9) {
+                document.getElementById('outputBox').textContent = "Invalid permission format. Please enter 9 characters (e.g., rwxr-xr--).";
+                return;
+            }
+
+            let octalValue = '';
+            try {
+                for (let i = 0; i < 9; i += 3) {
+                    const permissions = inputText.slice(i, i + 3);
+                    let octalDigit = 0;
+
+                    if (permissions[0] === 'r') octalDigit += 4;
+                    if (permissions[1] === 'w') octalDigit += 2;
+                    if (permissions[2] === 'x') octalDigit += 1;
+
+                    octalValue += octalDigit.toString();
+                }
+                document.getElementById('outputBox').textContent = octalValue;
+            } catch (error) {
+                document.getElementById('outputBox').textContent = "Error processing permissions. Please check the input format.";
+            }
+        }
+    </script>
+</body>
+</html>
