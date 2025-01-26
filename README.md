@@ -15,7 +15,8 @@ This project is a simple web application that converts a 9-character permission 
    git clone <repository-url>
    ````
 2. Navigate to the project directory:
-```cd cherrypy
+```
+cd cherrypy
 ```
 3. Open the index.html file in a web browser.
 4. Enter a 9-character permission string in the input field.
